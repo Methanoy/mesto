@@ -25,4 +25,4 @@
 ## Планы
 - Разработать функцию редактирования существующих карточек и добавления новых.
 ## Ссылка на GitHub Pages
-[Проект на GitHub Pages](https://methanoy.github.io/mesto/)
+[Проект на GitHub Pages]
