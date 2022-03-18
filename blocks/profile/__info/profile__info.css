@@ -1,0 +1,20 @@
+.profile__info {
+    display: grid;
+    grid-template-columns: 1fr 24px;
+    grid-template-areas: 
+    "name edit-button"
+    "occupation occupation";
+    column-gap: 18px;
+    align-items: baseline;
+    color: #fff;
+    max-width: 336px;
+}
+
+@media screen and (max-width: 879px) {
+    .profile__info {
+        max-width: 282px;
+        text-align: center;
+        column-gap: 10px;
+        margin: 22.25px 0 0 0;
+    }
+}

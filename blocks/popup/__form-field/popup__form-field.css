@@ -1,0 +1,22 @@
+.popup__form-field {
+    width: 358px;
+    border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    margin: 0;
+    padding: 0;
+    padding-bottom: 13px;
+    color: black;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.popup__form-field:nth-child(2n) {
+    margin: 30px 0 0 0;
+}
+
+@media screen and (max-width: 879px) {
+    .popup__form-field {
+        width: 238px;
+    }
+}
