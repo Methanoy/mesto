@@ -18,7 +18,7 @@
 - Grid.
 - Адаптивная вёрстка.
 ### JS
-- vanilla JavaScript.
+- Vanilla JavaScript.
 ### Иное
 - Методология БЭМ для разметки, CSS и построения файловой структуры проекта Nested BEM.
 - Работа с макетом в Figma.
