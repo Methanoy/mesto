@@ -22,9 +22,9 @@
             <div class="profile__info">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
                 <p class="profile__occupation">Исследователь океана</p>
-                <button class="profile__edit-button" aria-label="Редактировать профиль"></button>
+                <button class="profile__edit-button" aria-label="Редактировать профиль" type="button"></button>
             </div>
-            <button class="profile__add-button" aria-label="Добавить картинку"></button>
+            <button class="profile__add-button" aria-label="Добавить картинку" type="button"></button>
         </section>
 
         <section class="elements">
@@ -36,7 +36,7 @@
                         <img class="card__photo" src="./images/elements-karachaevsk.jpg" alt="Монастырь в горах.">
                         <div class="card__like-zone">
                             <h2 class="card__caption">Карачаевск</h2>
-                            <button class="card__like card__like_active" aria-label="Нравится"></button> 
+                            <button class="card__like card__like_active" aria-label="Нравится" type="button"></button> 
                         </div>
                     </div>
                 </li>
@@ -46,7 +46,7 @@
                         <img class="card__photo" src="./images/elements-elbrus.jpg" alt="Закат с видом на Эльбрус.">
                         <div class="card__like-zone">
                             <h2 class="card__caption">Гора Эльбрус</h2>
-                            <button class="card__like card__like_active" aria-label="Нравится"></button> 
+                            <button class="card__like card__like_active" aria-label="Нравится" type="button"></button> 
                         </div>
                     </div>
                 </li>
@@ -56,7 +56,7 @@
                         <img class="card__photo" src="./images/elements-dombay.jpg" alt="Высокая гора в пасмурную погоду.">
                         <div class="card__like-zone">
                             <h2 class="card__caption">Домбай</h2>
-                            <button class="card__like card__like_active" aria-label="Нравится"></button> 
+                            <button class="card__like card__like_active" aria-label="Нравится" type="button"></button> 
                         </div>
                     </div>
                 </li>
@@ -66,7 +66,7 @@
                         <img class="card__photo" src="./images/elements-elbrus.jpg" alt="Закат с видом на Эльбрус.">
                         <div class="card__like-zone">
                             <h2 class="card__caption">Гора Эльбрус</h2>
-                            <button class="card__like card__like_active" aria-label="Нравится"></button> 
+                            <button class="card__like card__like_active" aria-label="Нравится" type="button"></button> 
                         </div>
                     </div>
                 </li>
@@ -76,7 +76,7 @@
                         <img class="card__photo" src="./images/elements-dombay.jpg" alt="Высокая гора в пасмурную погоду.">
                         <div class="card__like-zone">
                             <h2 class="card__caption">Домбай</h2>
-                            <button class="card__like card__like_active" aria-label="Нравится"></button> 
+                            <button class="card__like card__like_active" aria-label="Нравится" type="button"></button> 
                         </div>
                     </div>
                 </li>
@@ -86,7 +86,7 @@
                         <img class="card__photo" src="./images/elements-karachaevsk.jpg" alt="Монастырь в горах.">
                         <div class="card__like-zone">
                             <h2 class="card__caption">Карачаево-Черкессия</h2>
-                            <button class="card__like card__like_active" aria-label="Нравится"></button> 
+                            <button class="card__like card__like_active" aria-label="Нравится" type="button"></button> 
                         </div>
                     </div>
                 </li>
@@ -104,14 +104,14 @@
     <div class="popup">
         <div class="popup__container">
             <button class="popup__close-button" aria-label="Закрыть"></button>
-            <section class="popup__content">
+            <div class="popup__content">
                 <h3 class="popup__title">Редактировать профиль</h3>
-                <form class="popup__form">
-                    <input class="popup__form-field popup__input-name" type="text">
-                    <input class="popup__form-field popup__input-occupation" type="text">
+                <form class="popup__form" name="form">
+                    <input class="popup__form-field popup__form-field_input-name" type="text" name="input-name">
+                    <input class="popup__form-field popup__form-field_input-occupation" type="text" name="input-occupation">
                     <button class="popup__save-button" type="submit" aria-label="Сохранить">Сохранить</button>
                 </form>
-            </section>
+            </div>
         </div>
     </div>
 
