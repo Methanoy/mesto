@@ -2,16 +2,21 @@
 let popupElement = document.querySelector('.popup');
 let editButton = document.querySelector('.profile__edit-button');
 let closeButton = popupElement.querySelector('.popup__close-button');
+let formElement = document.querySelector('.popup__form');
+let profileName = document.querySelector('.profile__name');
+let profileOccupation = document.querySelector('.profile__occupation');
+let nameInput = document.querySelector('.popup__form-field_input-name');
+let occupationInput = document.querySelector('.popup__form-field_input-occupation');
 
 function openPopup() {
     popupElement.classList.add('popup_opened');
-/* добавляем обработчик события для закрытия поп-апа по esc */
+    nameInput.value = profileName.textContent;
+    occupationInput.value = profileOccupation.textContent;
     document.addEventListener('keyup', onDocumentKeyUp);
 };
 
 function closePopup() {
     popupElement.classList.remove('popup_opened');
-/* удаляем обработчик события */
     document.removeEventListener('keyup', onDocumentKeyUp);
 };
 
@@ -22,19 +27,6 @@ function onDocumentKeyUp(event) {
     }
 };
 
-editButton.addEventListener('click', openPopup);
-closeButton.addEventListener('click', closePopup);
-
-/* переносим данные из профиля в поля формы поп-апа */
-let formElement = document.querySelector('.popup__form');
-let profileName = document.querySelector('.profile__name');
-let profileOccupation = document.querySelector('.profile__occupation');
-let nameInput = document.querySelector('.popup__input-name');
-let occupationInput = document.querySelector('.popup__input-occupation');
-
-nameInput.value = profileName.textContent;
-occupationInput.value = profileOccupation.textContent;
-
 /* сохраняем в профиль отредактированные данные в полях формы поп-апа */
 function formSubmitHandler (evt) {
     evt.preventDefault();
@@ -43,4 +35,6 @@ function formSubmitHandler (evt) {
 closePopup();
 };
 
+editButton.addEventListener('click', openPopup);
+closeButton.addEventListener('click', closePopup);
 formElement.addEventListener('submit', formSubmitHandler); 
