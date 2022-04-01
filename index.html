@@ -10,7 +10,6 @@
 </head>
 
 <body class="page">
-
     <header class="header">
         <img class="header__logo" src="./images/header_logo.svg" alt="Логотип проекта 'Место', написанный латинскими буквами.">
     </header>
@@ -29,69 +28,7 @@
 
         <section class="elements">
 
-            <ul class="cards">
-
-                <li class="cards__element">
-                    <div class="card">
-                        <img class="card__photo" src="./images/elements-karachaevsk.jpg" alt="Монастырь в горах.">
-                        <div class="card__like-zone">
-                            <h2 class="card__caption">Карачаевск</h2>
-                            <button class="card__like card__like_active" aria-label="Нравится" type="button"></button> 
-                        </div>
-                    </div>
-                </li>
-
-                <li class="cards__element">
-                    <div class="card">
-                        <img class="card__photo" src="./images/elements-elbrus.jpg" alt="Закат с видом на Эльбрус.">
-                        <div class="card__like-zone">
-                            <h2 class="card__caption">Гора Эльбрус</h2>
-                            <button class="card__like card__like_active" aria-label="Нравится" type="button"></button> 
-                        </div>
-                    </div>
-                </li>
-
-                <li class="cards__element">
-                    <div class="card">
-                        <img class="card__photo" src="./images/elements-dombay.jpg" alt="Высокая гора в пасмурную погоду.">
-                        <div class="card__like-zone">
-                            <h2 class="card__caption">Домбай</h2>
-                            <button class="card__like card__like_active" aria-label="Нравится" type="button"></button> 
-                        </div>
-                    </div>
-                </li>
-
-                <li class="cards__element">
-                    <div class="card">
-                        <img class="card__photo" src="./images/elements-elbrus.jpg" alt="Закат с видом на Эльбрус.">
-                        <div class="card__like-zone">
-                            <h2 class="card__caption">Гора Эльбрус</h2>
-                            <button class="card__like card__like_active" aria-label="Нравится" type="button"></button> 
-                        </div>
-                    </div>
-                </li>
-
-                <li class="cards__element">
-                    <div class="card">
-                        <img class="card__photo" src="./images/elements-dombay.jpg" alt="Высокая гора в пасмурную погоду.">
-                        <div class="card__like-zone">
-                            <h2 class="card__caption">Домбай</h2>
-                            <button class="card__like card__like_active" aria-label="Нравится" type="button"></button> 
-                        </div>
-                    </div>
-                </li>
-
-                <li class="cards__element">
-                    <div class="card">
-                        <img class="card__photo" src="./images/elements-karachaevsk.jpg" alt="Монастырь в горах.">
-                        <div class="card__like-zone">
-                            <h2 class="card__caption">Карачаево-Черкессия</h2>
-                            <button class="card__like card__like_active" aria-label="Нравится" type="button"></button> 
-                        </div>
-                    </div>
-                </li>
-
-            </ul>
+            <ul class="cards"></ul>
             
         </section>
 
@@ -101,22 +38,55 @@
         <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
 
-    <div class="popup">
+    <template id="cards-template">
+        <li class="cards__element">
+            <div class="card">
+                <img class="card__photo" src="#" alt="#">
+                <button class="card__del" aria-label="Удалить карточку" type="button"></button> 
+                <div class="card__like-zone">
+                    <h2 class="card__caption">#</h2>
+                    <button class="card__like" aria-label="" type="button"></button> 
+                </div>
+            </div>
+        </li>
+    </template>
+
+    <div class="popup popup_profile">
         <div class="popup__container">
-            <button class="popup__close-button" aria-label="Закрыть" type="button"></button>
+            <button class="popup__close-button popup__close-button_edit" aria-label="Закрыть" type="button"></button>
             <div class="popup__content">
                 <h3 class="popup__title">Редактировать профиль</h3>
-                <form class="popup__form" name="form">
-                    <input class="popup__form-field popup__form-field_input-name" type="text" name="input-name">
-                    <input class="popup__form-field popup__form-field_input-occupation" type="text" name="input-occupation">
+                <form class="popup__profile-form" name="profile-form">
+                    <input class="popup__form-field popup__form-field_input-name" type="text" name="input-name" required>
+                    <input class="popup__form-field popup__form-field_input-occupation" type="text" name="input-occupation" required>
                     <button class="popup__save-button" type="submit" aria-label="Сохранить">Сохранить</button>
                 </form>
             </div>
         </div>
     </div>
 
+    <div class="popup popup_cards">
+        <div class="popup__container">
+            <button class="popup__close-button popup__close-button_add" aria-label="Закрыть" type="button"></button>
+            <div class="popup__content">
+                <h3 class="popup__title">Новое место</h3>
+                <form class="popup__cards-form" name="card-form">
+                    <input class="popup__form-field popup__form-field_input-cardname" type="text" name="input-cardname" value="" placeholder="Название" required>
+                    <input class="popup__form-field popup__form-field_input-link" type="url" name="input-link" value="" placeholder="Ссылка на картинку" required>
+                    <button class="popup__save-button" type="submit" aria-label="Создать">Создать</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup popup_zoom">
+        <div class="popup__container popup__container_zoom">
+            <img class="popup__zoom-image" src="#" alt="#">
+            <h3 class="popup__title popup__title_zoom">#</h3>
+            <button class="popup__close-button popup__close-button_zoom" aria-label="Закрыть" type="button"></button>
+        </div>
+    </div>
+
 <script src="./scripts/index.js"></script>
-
 </body>
-
 </html>
