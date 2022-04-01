@@ -4,7 +4,6 @@
     position: fixed;
     opacity: 0;
     visibility: hidden;
-    position: fixed;
     background: rgba(0, 0, 0, .5);
     color: #000;
     font-family: "Inter", Arial, sans-serif;
