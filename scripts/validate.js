@@ -29,6 +29,7 @@ const setEventListeners = (formElement, {inputSelector, saveButtonSelector, ...r
     });
 };
 
+//Включение / выключение кнопки
 const toggleButtonState = (inputList, buttonElement, {invalidButtonClass}) => {
     if (hasInvalidInput(inputList)) {
         buttonElement.classList.add(invalidButtonClass);
@@ -37,23 +38,24 @@ const toggleButtonState = (inputList, buttonElement, {invalidButtonClass}) => {
     }
 };
 
-
+//Блокиратор кнопки после изменения формы:
 const inactiveButton = (popup) => {
     const button = popup.querySelector(validationConfig.saveButtonSelector);
     button.disabled = true;
     button.classList.add(validationConfig.invalidButtonClass);
 }
 
+//Очистка форм:
 const resetForm = (popup) => {
     const inputList = Array.from(popup.querySelectorAll(validationConfig.inputSelector));
     const errorList = Array.from(popup.querySelectorAll(validationConfig.inputErrorClass));
-    errorList.forEach(item => {
-        item.textContent = '';
-        item.classList.remove(validationConfig.inputErrorActiveClass);
+    errorList.forEach(error => {
+        error.textContent = '';
+        error.classList.remove(validationConfig.inputErrorActiveClass);
     });
-    inputList.forEach(item => {
-        item.value = '';
-        item.classList.remove(validationConfig.inputErrorClass);
+    inputList.forEach(input => {
+        input.value = '';
+        input.classList.remove(validationConfig.inputErrorClass);
     });
 }
 
