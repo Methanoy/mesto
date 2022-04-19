@@ -1,14 +1,16 @@
 /*--------------------------------------Валидация форм-------------------------------------------------*/
-
+//Объект селекторов и классов для валидации:
 const validationConfig = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
+    inputErrorSelector: '.popup__input-error',
     saveButtonSelector: '.popup__save-button',
     invalidButtonClass: 'popup__save-button_invalid',
     inputErrorClass: 'popup__input_field-error',
     inputErrorActiveClass:'popup__input-error_active'
 };
 
+//Поиск форм:
 const enableValidation = ({formSelector, ...rest}) => {
     const formList = Array.from(document.querySelectorAll(formSelector));
     formList.forEach((formElement) => {
@@ -17,6 +19,7 @@ const enableValidation = ({formSelector, ...rest}) => {
     });
 };
 
+//Добавление обработчиков инпутам:
 const setEventListeners = (formElement, {inputSelector, saveButtonSelector, ...rest}) => {
     const inputList = Array.from(formElement.querySelectorAll(inputSelector));
     const buttonElement = formElement.querySelector(saveButtonSelector);
@@ -29,12 +32,14 @@ const setEventListeners = (formElement, {inputSelector, saveButtonSelector, ...r
     });
 };
 
-//Включение / выключение кнопки
+//Переключения состояния кнопки после валидации инпутов:
 const toggleButtonState = (inputList, buttonElement, {invalidButtonClass}) => {
     if (hasInvalidInput(inputList)) {
         buttonElement.classList.add(invalidButtonClass);
-    } else {
+        buttonElement.disabled = true;
+        } else {
         buttonElement.classList.remove(invalidButtonClass);
+        buttonElement.disabled = false;
     }
 };
 
@@ -48,18 +53,18 @@ const inactiveButton = (popup) => {
 //Очистка форм:
 const resetForm = (popup) => {
     const inputList = Array.from(popup.querySelectorAll(validationConfig.inputSelector));
-    const errorList = Array.from(popup.querySelectorAll(validationConfig.inputErrorClass));
-    errorList.forEach(error => {
-        error.textContent = '';
-        error.classList.remove(validationConfig.inputErrorActiveClass);
-    });
+    const errorList = Array.from(popup.querySelectorAll(validationConfig.inputErrorSelector));
     inputList.forEach(input => {
         input.value = '';
         input.classList.remove(validationConfig.inputErrorClass);
     });
+    errorList.forEach(error => {
+        error.textContent = '';
+        error.classList.remove(validationConfig.inputErrorActiveClass);
+    });
 }
 
-//Показываем ошибку валидации:
+//Отображение ошибки валидации:
 const showError = (formElement, inputElement, errorMessage, {inputErrorClass, inputErrorActiveClass}) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(inputErrorClass);
@@ -67,7 +72,7 @@ const showError = (formElement, inputElement, errorMessage, {inputErrorClass, in
     errorElement.classList.add(inputErrorActiveClass);
 };
 
-//Прячем ошибку валидации:
+//Скрытие ошибки валидации:
 const hideError = (formElement, inputElement, {inputErrorClass, inputErrorActiveClass}) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.remove(inputErrorClass);
@@ -75,7 +80,7 @@ const hideError = (formElement, inputElement, {inputErrorClass, inputErrorActive
     errorElement.textContent = '';
 };
 
-//Проверка валидации инпутов:
+//Валидация инпута:
 const isValid = (formElement, inputElement, {inputErrorClass, inputErrorActiveClass}) => {
     if(!inputElement.validity.valid) {
         showError(formElement, inputElement, inputElement.validationMessage, {inputErrorClass, inputErrorActiveClass});
@@ -84,6 +89,7 @@ const isValid = (formElement, inputElement, {inputErrorClass, inputErrorActiveCl
     }
 };
 
+//Валидация всех инпутов:
 const hasInvalidInput = (inputList) => {
     return inputList.some((inputElement) => {
         return !inputElement.validity.valid;

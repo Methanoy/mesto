@@ -1,3 +1,6 @@
+//Общий класс попапов:
+const popups = document.querySelectorAll('.popup');
+
 //Попап профиля:
 const profilePopup = document.querySelector('.popup_profile');
 const profileName = document.querySelector('.profile__name');
@@ -24,7 +27,6 @@ const placesContainer = document.querySelector('.cards');
 //Кнопки:
 const editProfileButton = document.querySelector('.profile__edit-button');
 const addCardButton = document.querySelector('.profile__add-button');
-const closeButton = document.querySelectorAll('.popup__close-button');
 
 //Массив предзагружаемых карточек "из коробки":
 const initialCards = [
@@ -62,8 +64,8 @@ function createCard(item) {
     cardPhoto.src = item.link;
     cardPhoto.alt = item.name;
     newCard.querySelector('.card__caption').textContent = item.name;
-    cardPhoto.addEventListener('click', openZoomPopup);
-    newCard.querySelector('.card__like').addEventListener('click', likeActive);
+    cardPhoto.addEventListener('click', () => openZoomPopup(item));
+    newCard.querySelector('.card__like').addEventListener('click', toggleLike);
     newCard.querySelector('.card__del').addEventListener('click', removeCard);
     return newCard;
 }
@@ -80,7 +82,7 @@ showCards();
 
 /*--------------------------------------Добавление карточки-------------------------------------------------*/
 
-function newCardFormSubmitHandler (event) {
+function handleNewCardFormSubmit (event) {
     event.preventDefault();
     insertCard(createCard({
         name: cardsFormInputName.value,
@@ -88,14 +90,13 @@ function newCardFormSubmitHandler (event) {
     }));
     cardsFormInputName.value = '';
     cardsFormInputLink.value = '';
-    inactiveButton(cardsPopup);
     closePopup(cardsPopup);
 }
 
-cardsForm.addEventListener('submit', newCardFormSubmitHandler);
+cardsForm.addEventListener('submit', handleNewCardFormSubmit);
 
 /*--------------------------------------Лайк карточки-------------------------------------------------*/
-function likeActive(event) {
+function toggleLike(event) {
     event.target.classList.toggle('card__like_active');
 }
 
@@ -107,8 +108,7 @@ function removeCard(event) {
 /*--------------------------------------Открытие попапов-------------------------------------------------*/
 function openPopup(element) {
     element.classList.add('popup_opened');
-    document.addEventListener('keyup', onDocumentKeyUp);
-
+    document.addEventListener('keyup', handleEscKey);
 }
 
 //Profile:
@@ -116,59 +116,61 @@ function editProfileForm() {
     resetForm(profilePopup);
     nameInput.value = profileName.textContent;
     occupationInput.value = profileOccupation.textContent;
+    inactiveButton(profilePopup);
     openPopup(profilePopup);
 }
 
 editProfileButton.addEventListener('click', editProfileForm);
 
-function formSubmitHandler (event) {
+function handleProfileFormSubmit (event) {
     event.preventDefault();
     profileName.textContent = nameInput.value;
     profileOccupation.textContent = occupationInput.value;
-    inactiveButton(profilePopup);
     closePopup(profilePopup);
 }
 
-profileForm.addEventListener('submit', formSubmitHandler);
+profileForm.addEventListener('submit', handleProfileFormSubmit);
 
 //Cards:
 function openAddCardPopup() {
     resetForm(cardsPopup);
+    inactiveButton(cardsPopup);
     openPopup(cardsPopup);
 }
 
 addCardButton.addEventListener('click', openAddCardPopup);
 
 //Zoom:
-function openZoomPopup(event) {
-    zoomImage.src = event.target.src;
-    zoomImage.alt = event.target.alt;
-    zoomTitle.textContent = event.target.alt;
+function openZoomPopup(item) {
+    zoomImage.src = item.link;
+    zoomImage.alt = item.name;
+    zoomTitle.textContent = item.name;
     openPopup(zoomPopup);
 }
+
 
 /*--------------------------------------Закрытие попапов-------------------------------------------------*/
 function closePopup(element) {
     element.classList.remove('popup_opened');
-    document.removeEventListener('keyup', onDocumentKeyUp);
+    document.removeEventListener('keyup', handleEscKey);
 }
 
-//Закрытие любого открытого попапа
-closeButton.forEach(item => {
-    item.addEventListener('click', evt => closePopup(evt.target.closest('.popup'))); 
-});
-
-//Закрытие попапа при нажатии ESC
-function onDocumentKeyUp(evt) {
+//Закрытие попапа при нажатии ESC:
+function handleEscKey(evt) {
     if(evt.code === 'Escape') {
         const openedPopup = document.querySelector('.popup_opened');
         closePopup(openedPopup);
     }
 }
 
-//Закрытие попапов при клике на overlay:
-document.addEventListener('mousedown', evt => {
-    if(evt.target.classList.contains('popup')) {
-        closePopup(evt.target);
-    }
+//Закрытие попапов при нажатии на overlay и кнопки закрытия:
+popups.forEach((popup) => { 
+    popup.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup_opened')) {
+            closePopup(popup);
+        }
+        if (evt.target.classList.contains('popup__close-button')) {
+            closePopup(popup);
+        }
+    });
 });
