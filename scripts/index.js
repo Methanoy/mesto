@@ -1,3 +1,5 @@
+import Card from './Card.js';
+
 //Общий класс попапов:
 const popups = document.querySelectorAll('.popup');
 
@@ -21,7 +23,6 @@ const zoomImage = document.querySelector('.popup__zoom-image');
 const zoomTitle = document.querySelector('.popup__title_zoom');
 
 //Темплейт:
-const cardsTemplate = document.querySelector('#cards-template').content;
 const placesContainer = document.querySelector('.cards');
 
 //Кнопки:
@@ -58,27 +59,12 @@ const initialCards = [
 
 /*--------------------------------------Карточки "из коробки"-------------------------------------------------*/
 
-function createCard(item) {
-    const newCard = cardsTemplate.querySelector('.cards__element').cloneNode(true);
-    const cardPhoto = newCard.querySelector('.card__photo');
-    cardPhoto.src = item.link;
-    cardPhoto.alt = item.name;
-    newCard.querySelector('.card__caption').textContent = item.name;
-    cardPhoto.addEventListener('click', () => openZoomPopup(item));
-    newCard.querySelector('.card__like').addEventListener('click', toggleLike);
-    newCard.querySelector('.card__del').addEventListener('click', removeCard);
-    return newCard;
-}
+initialCards.forEach(item => {
+    const card = new Card(item, '#cards-template');
+    const cardElement = card.generateCard();
 
-function insertCard(card) {
-    placesContainer.prepend(card);
-}
-
-function showCards() {
-    initialCards.forEach(item => insertCard(createCard(item)));
-}
-
-showCards();
+    placesContainer.prepend(cardElement);
+});
 
 /*--------------------------------------Добавление карточки-------------------------------------------------*/
 
@@ -94,16 +80,6 @@ function handleNewCardFormSubmit (event) {
 }
 
 cardsForm.addEventListener('submit', handleNewCardFormSubmit);
-
-/*--------------------------------------Лайк карточки-------------------------------------------------*/
-function toggleLike(event) {
-    event.target.classList.toggle('card__like_active');
-}
-
-/*--------------------------------------Удаление карточки-------------------------------------------------*/
-function removeCard(event) {
-    event.target.closest('.cards__element').remove();
-}
 
 /*--------------------------------------Открытие попапов-------------------------------------------------*/
 function openPopup(element) {
@@ -141,13 +117,12 @@ function openAddCardPopup() {
 addCardButton.addEventListener('click', openAddCardPopup);
 
 //Zoom:
-function openZoomPopup(item) {
-    zoomImage.src = item.link;
-    zoomImage.alt = item.name;
-    zoomTitle.textContent = item.name;
+export default function openZoomPopup(name, link) {
+    zoomImage.src = link;
+    zoomImage.alt = name;
+    zoomTitle.textContent = name;
     openPopup(zoomPopup);
 }
-
 
 /*--------------------------------------Закрытие попапов-------------------------------------------------*/
 function closePopup(element) {
