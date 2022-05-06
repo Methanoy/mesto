@@ -1,10 +1,9 @@
-import openZoomPopup from './index.js';
-
 class Card {
-    constructor(data, cardSelector) {
+    constructor(data, cardSelector, openZoomPopup) {
         this._name = data.name;
         this._link = data.link;
         this._cardSelector = cardSelector;
+        this._openZoomPopup = openZoomPopup;
     }
     
     _getTemplate() {
@@ -30,7 +29,7 @@ class Card {
 
     _setEventListeners() {
         this._element.querySelector('.card__photo').addEventListener('click', () => { 
-            openZoomPopup(this._name, this._link);
+            this._openZoomPopup(this._name, this._link);
         });
 
         this._element.querySelector('.card__like').addEventListener('click', () => { 
@@ -48,6 +47,7 @@ class Card {
 
     _handleDeleteCard() {
         this._element.closest('.cards__element').remove();
+        this._element = null; // полное удаление
     }
 
 }

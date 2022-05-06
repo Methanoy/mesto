@@ -58,13 +58,21 @@ const initialCards = [
 ];
 
 /*--------------------------------------Карточки "из коробки"-------------------------------------------------*/
+function createCard(item) {
+        const card = new Card(item, '#cards-template', openZoomPopup);
+        const cardElement = card.generateCard();
+        return cardElement;
+};
 
-initialCards.forEach(item => {
-    const card = new Card(item, '#cards-template');
-    const cardElement = card.generateCard();
+function insertCard(card) {
+    placesContainer.prepend(card);
+}
 
-    placesContainer.prepend(cardElement);
-});
+function showCards() {
+    initialCards.forEach(item => insertCard(createCard(item)));
+}
+
+showCards();
 
 /*--------------------------------------Добавление карточки-------------------------------------------------*/
 
