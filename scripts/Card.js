@@ -46,8 +46,8 @@ class Card {
     }
 
     _handleDeleteCard() {
-        this._element.closest('.cards__element').remove();
-        this._element = null; // полное удаление
+        this._element.remove();
+        this._element = null;
     }
 
 }

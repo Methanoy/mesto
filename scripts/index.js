@@ -1,4 +1,6 @@
+import { initialCards, validationConfig } from './initial.js';
 import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 
 //Общий класс попапов:
 const popups = document.querySelectorAll('.popup');
@@ -28,34 +30,6 @@ const placesContainer = document.querySelector('.cards');
 //Кнопки:
 const editProfileButton = document.querySelector('.profile__edit-button');
 const addCardButton = document.querySelector('.profile__add-button');
-
-//Массив предзагружаемых карточек "из коробки":
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
 
 /*--------------------------------------Карточки "из коробки"-------------------------------------------------*/
 function createCard(item) {
@@ -89,6 +63,14 @@ function handleNewCardFormSubmit (event) {
 
 cardsForm.addEventListener('submit', handleNewCardFormSubmit);
 
+/*--------------------------------------Валидация форм-------------------------------------------------*/
+
+const profileFormValidator = new FormValidator(validationConfig, profileForm);
+const addCardFormValidator = new FormValidator(validationConfig, cardsForm);
+
+profileFormValidator.enableValidation();
+addCardFormValidator.enableValidation();
+
 /*--------------------------------------Открытие попапов-------------------------------------------------*/
 function openPopup(element) {
     element.classList.add('popup_opened');
@@ -97,10 +79,10 @@ function openPopup(element) {
 
 //Profile:
 function editProfileForm() {
-    resetForm(profilePopup);
+    profileFormValidator.resetForm();
     nameInput.value = profileName.textContent;
     occupationInput.value = profileOccupation.textContent;
-    inactiveButton(profilePopup);
+    profileFormValidator.inactiveButton();
     openPopup(profilePopup);
 }
 
@@ -117,15 +99,15 @@ profileForm.addEventListener('submit', handleProfileFormSubmit);
 
 //Cards:
 function openAddCardPopup() {
-    resetForm(cardsPopup);
-    inactiveButton(cardsPopup);
+    addCardFormValidator.resetForm();
+    addCardFormValidator.inactiveButton();
     openPopup(cardsPopup);
 }
 
 addCardButton.addEventListener('click', openAddCardPopup);
 
 //Zoom:
-export default function openZoomPopup(name, link) {
+function openZoomPopup(name, link) {
     zoomImage.src = link;
     zoomImage.alt = name;
     zoomTitle.textContent = name;
