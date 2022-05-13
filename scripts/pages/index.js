@@ -1,3 +1,4 @@
+import Popup from '../components/Popup.js';
 import Section from '../components/Section.js';
 import { initialCards, validationConfig } from '../utils/initial.js';
 import Card from '../components/Card.js';
@@ -69,18 +70,22 @@ profileFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 
 /*--------------------------------------Открытие попапов-------------------------------------------------*/
+/*
 function openPopup(element) {
     element.classList.add('popup_opened');
     document.addEventListener('keyup', handleEscKey);
 }
-
+*/
 //Profile:
+const profileFormPopup = new Popup(profilePopup);
+
 function editProfileForm() {
     profileFormValidator.resetForm();
     nameInput.value = profileName.textContent;
     occupationInput.value = profileOccupation.textContent;
     profileFormValidator.inactiveButton();
-    openPopup(profilePopup);
+    //openPopup(profilePopup);
+    profileFormPopup.open();
 }
 
 editProfileButton.addEventListener('click', editProfileForm);
@@ -95,10 +100,12 @@ function handleProfileFormSubmit (event) {
 profileForm.addEventListener('submit', handleProfileFormSubmit);
 
 //Cards:
+const addCardFormPopup = new Popup(cardsPopup);
+
 function openAddCardPopup() {
     addCardFormValidator.resetForm();
     addCardFormValidator.inactiveButton();
-    openPopup(cardsPopup);
+    addCardFormPopup.open();
 }
 
 addCardButton.addEventListener('click', openAddCardPopup);
@@ -112,6 +119,7 @@ function openZoomPopup(name, link) {
 }
 
 /*--------------------------------------Закрытие попапов-------------------------------------------------*/
+/*
 function closePopup(element) {
     element.classList.remove('popup_opened');
     document.removeEventListener('keyup', handleEscKey);
@@ -136,3 +144,4 @@ popups.forEach((popup) => {
         }
     });
 });
+*/
