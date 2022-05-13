@@ -1,6 +1,7 @@
-import { initialCards, validationConfig } from './initial.js';
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
+import Section from '../components/Section.js';
+import { initialCards, validationConfig } from '../utils/initial.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
 
 //Общий класс попапов:
 const popups = document.querySelectorAll('.popup');
@@ -32,21 +33,17 @@ const editProfileButton = document.querySelector('.profile__edit-button');
 const addCardButton = document.querySelector('.profile__add-button');
 
 /*--------------------------------------Карточки "из коробки"-------------------------------------------------*/
-function createCard(item) {
-        const card = new Card(item, '#cards-template', openZoomPopup);
+
+const cardsList = new Section({
+    items: initialCards,
+    renderer: (cardItem) => {
+        const card = new Card(cardItem, '#cards-template', openZoomPopup);
         const cardElement = card.generateCard();
-        return cardElement;
-};
+        cardsList.addItem(cardElement);
+    }
+}, placesContainer);
 
-function insertCard(card) {
-    placesContainer.prepend(card);
-}
-
-function showCards() {
-    initialCards.forEach(item => insertCard(createCard(item)));
-}
-
-showCards();
+cardsList.renderItems();
 
 /*--------------------------------------Добавление карточки-------------------------------------------------*/
 
