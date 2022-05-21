@@ -1,9 +1,9 @@
 class Card {
-    constructor(data, cardSelector, openZoomPopup) {
+    constructor(data, cardSelector, handleCardClick) {
         this._name = data.name;
         this._link = data.link;
         this._cardSelector = cardSelector;
-        this._openZoomPopup = openZoomPopup;
+        this._handleCardClick = handleCardClick;
     }
     
     _getTemplate() {
@@ -28,9 +28,7 @@ class Card {
     }
 
     _setEventListeners() {
-        this._element.querySelector('.card__photo').addEventListener('click', () => { 
-            this._openZoomPopup(this._name, this._link);
-        });
+        this._element.querySelector('.card__photo').addEventListener('click', () => this._handleCardClick(this._name, this._link));
 
         this._element.querySelector('.card__like').addEventListener('click', () => { 
             this._handleToggleLike();

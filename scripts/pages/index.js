@@ -1,3 +1,4 @@
+import PopupWithImage from '../components/PopupWithImage.js'
 import Popup from '../components/Popup.js';
 import Section from '../components/Section.js';
 import { initialCards, validationConfig } from '../utils/initial.js';
@@ -38,7 +39,7 @@ const addCardButton = document.querySelector('.profile__add-button');
 const cardsList = new Section({
     items: initialCards,
     renderer: (cardItem) => {
-        const card = new Card(cardItem, '#cards-template', openZoomPopup);
+        const card = new Card(cardItem, '#cards-template', handleCardClick);
         const cardElement = card.generateCard();
         cardsList.addItem(cardElement);
     }
@@ -111,13 +112,20 @@ function openAddCardPopup() {
 addCardButton.addEventListener('click', openAddCardPopup);
 
 //Zoom:
+
+const popupWithImage = new PopupWithImage(zoomPopup);
+
+function handleCardClick (name, link) {
+    popupWithImage.open(name, link);
+}
+/*
 function openZoomPopup(name, link) {
     zoomImage.src = link;
     zoomImage.alt = name;
     zoomTitle.textContent = name;
     openPopup(zoomPopup);
 }
-
+*/
 /*--------------------------------------Закрытие попапов-------------------------------------------------*/
 /*
 function closePopup(element) {
