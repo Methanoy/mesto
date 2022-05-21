@@ -3,14 +3,15 @@ import Section from '../components/Section.js';
 import { initialCards, validationConfig } from '../utils/initial.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
+import UserInfo from '../components/UserInfo.js';
 
 //Общий класс попапов:
 const popups = document.querySelectorAll('.popup');
 
 //Попап профиля:
 const profilePopup = document.querySelector('.popup_profile');
-const profileName = document.querySelector('.profile__name');
-const profileOccupation = document.querySelector('.profile__occupation');
+const profileName = '.profile__name';
+const profileOccupation = '.profile__occupation';
 const nameInput = document.querySelector('.popup__input_name');
 const occupationInput = document.querySelector('.popup__input_occupation');
 const profileForm = document.querySelector('.popup__profile-form');
@@ -69,6 +70,12 @@ const addCardFormValidator = new FormValidator(validationConfig, cardsForm);
 profileFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 
+/*--------------------------------------Данные пользователя-------------------------------------------------*/
+
+const userInfo = new UserInfo({ profileName, profileOccupation });
+
+//console.log(userInfo.setUserInfo());
+
 /*--------------------------------------Открытие попапов-------------------------------------------------*/
 /*
 function openPopup(element) {
@@ -81,8 +88,10 @@ const profileFormPopup = new Popup(profilePopup);
 
 function editProfileForm() {
     profileFormValidator.resetForm();
-    nameInput.value = profileName.textContent;
-    occupationInput.value = profileOccupation.textContent;
+    //nameInput.value = profileName.textContent;
+    //occupationInput.value = profileOccupation.textContent;
+    nameInput.value = userInfo.getUserInfo().name;
+    occupationInput.value = userInfo.getUserInfo().occupation;
     profileFormValidator.inactiveButton();
     //openPopup(profilePopup);
     profileFormPopup.open();
@@ -94,7 +103,7 @@ function handleProfileFormSubmit (event) {
     event.preventDefault();
     profileName.textContent = nameInput.value;
     profileOccupation.textContent = occupationInput.value;
-    closePopup(profilePopup);
+    profileFormPopup.close();
 }
 
 profileForm.addEventListener('submit', handleProfileFormSubmit);
