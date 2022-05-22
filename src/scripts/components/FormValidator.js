@@ -8,6 +8,9 @@ class FormValidator {
         this._inputErrorClass = validationConfig.inputErrorClass;
         this._inputErrorActiveClass = validationConfig.inputErrorActiveClass;
         this._formElement = formElement;
+        this._buttonElement = this._formElement.querySelector(this._saveButtonSelector);
+        this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+        this._errorList = Array.from(this._formElement.querySelectorAll(this._inputErrorSelector));
     }
 
     enableValidation() {
@@ -17,15 +20,12 @@ class FormValidator {
 
     //Добавление обработчиков инпутам:
     _setEventListeners() {
-        const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-        const buttonElement = this._formElement.querySelector(this._saveButtonSelector);
+        this._toggleButtonState();
         
-        this._toggleButtonState(inputList, buttonElement);
-        
-        inputList.forEach((inputElement) => {
+        this._inputList.forEach((inputElement) => {
             inputElement.addEventListener('input', () => {
                 this._isValid(inputElement);
-                this._toggleButtonState(inputList, buttonElement);
+                this._toggleButtonState();
             });
         });
     };
@@ -56,41 +56,33 @@ class FormValidator {
     };
 
     //Переключения состояния кнопки после валидации инпутов:
-    _toggleButtonState(inputList, buttonElement) {
-        if (this._hasInvalidInput(inputList)) {
-            buttonElement.classList.add(this._invalidButtonClass);
-            buttonElement.disabled = true;
+    _toggleButtonState() {
+        if (this._hasInvalidInput(this._inputList)) {
+            this.inactiveButton();
             } else {
-            buttonElement.classList.remove(this._invalidButtonClass);
-            buttonElement.disabled = false;
+            this._buttonElement.classList.remove(this._invalidButtonClass);
+            this._buttonElement.disabled = false;
         }
     };
 
     //Валидация всех инпутов:
-    _hasInvalidInput(inputList) {
-        return inputList.some(inputElement => {
+    _hasInvalidInput() {
+        return this._inputList.some(inputElement => {
             return !inputElement.validity.valid;
         });
     };
 
     //Блокиратор кнопки после изменения формы:
     inactiveButton() {
-        const buttonElement = this._formElement.querySelector(this._saveButtonSelector);
-        buttonElement.disabled = true;
-        buttonElement.classList.add(this._invalidButtonClass);
+        this._buttonElement.disabled = true;
+        this._buttonElement.classList.add(this._invalidButtonClass);
     }
 
     //Очистка форм:
     resetForm() {
-        const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-        const errorList = Array.from(this._formElement.querySelectorAll(this._inputErrorSelector));
-        inputList.forEach(input => {
-            input.value = '';
-            input.classList.remove(this._inputErrorClass);
-        });
-        errorList.forEach(error => {
-            error.textContent = '';
-            error.classList.remove(this._inputErrorActiveClass);
+        this._inputList.forEach(input => {
+            this._hideError(input);
+            input.value = ''; 
         });
     }
 
