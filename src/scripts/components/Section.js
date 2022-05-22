@@ -2,7 +2,7 @@ class Section {
     constructor({ items, renderer }, cardListSelector) {
     this._initialArray = items;
     this._renderer = renderer;
-    this._container = cardListSelector;
+    this._container = document.querySelector(cardListSelector);
     }
 
     renderItems() {
