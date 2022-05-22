@@ -37,4 +37,33 @@ const validationConfig = {
     inputErrorActiveClass:'popup__input-error_active'
 };
 
-export { initialCards, validationConfig };
+//Попап профиля:
+const nameInput = document.querySelector('.popup__input_name');
+const occupationInput = document.querySelector('.popup__input_occupation');
+const profileForm = document.querySelector('.popup__profile-form');
+
+//Попап карточек:
+const cardsForm = document.querySelector('.popup__cards-form');
+const cardsFormInputName = document.querySelector('.popup__input_cardname');
+const cardsFormInputLink = document.querySelector('.popup__input_link');
+
+//Темплейт:
+const cardsContainer = document.querySelector('.cards');
+
+//Кнопки:
+const editProfileButton = document.querySelector('.profile__edit-button');
+const addCardButton = document.querySelector('.profile__add-button');
+
+export { 
+    initialCards, 
+    validationConfig,
+    nameInput, 
+    occupationInput, 
+    profileForm,
+    cardsForm, 
+    cardsFormInputName, 
+    cardsFormInputLink,
+    cardsContainer,
+    editProfileButton, 
+    addCardButton 
+};
