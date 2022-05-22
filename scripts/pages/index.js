@@ -1,32 +1,33 @@
 import PopupWithImage from '../components/PopupWithImage.js'
-import Popup from '../components/Popup.js';
+//import Popup from '../components/Popup.js';
 import Section from '../components/Section.js';
 import { initialCards, validationConfig } from '../utils/initial.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import UserInfo from '../components/UserInfo.js';
+import PopupWithForm from '../components/PopupWithForm.js';
 
 //Общий класс попапов:
-const popups = document.querySelectorAll('.popup');
+//const popups = document.querySelectorAll('.popup');
 
 //Попап профиля:
-const profilePopup = document.querySelector('.popup_profile');
-const profileName = '.profile__name';
-const profileOccupation = '.profile__occupation';
+//const profilePopup = '.popup_profile';
+const profileNameSelector = '.profile__name';
+const profileOccupationSelector = '.profile__occupation';
 const nameInput = document.querySelector('.popup__input_name');
 const occupationInput = document.querySelector('.popup__input_occupation');
 const profileForm = document.querySelector('.popup__profile-form');
 
 //Попап карточек:
-const cardsPopup = document.querySelector('.popup_cards');
+//const cardsPopup = '.popup_cards';
 const cardsForm = document.querySelector('.popup__cards-form');
 const cardsFormInputName = document.querySelector('.popup__input_cardname');
 const cardsFormInputLink = document.querySelector('.popup__input_link');
 
 //Попап зума:
-const zoomPopup = document.querySelector('.popup_zoom');
-const zoomImage = document.querySelector('.popup__zoom-image');
-const zoomTitle = document.querySelector('.popup__title_zoom');
+//const zoomPopup = '.popup_zoom';
+//const zoomImage = document.querySelector('.popup__zoom-image');
+//const zoomTitle = document.querySelector('.popup__title_zoom');
 
 //Темплейт:
 const placesContainer = document.querySelector('.cards');
@@ -49,7 +50,7 @@ const cardsList = new Section({
 cardsList.renderItems();
 
 /*--------------------------------------Добавление карточки-------------------------------------------------*/
-
+/*
 function handleNewCardFormSubmit (event) {
     event.preventDefault();
     insertCard(createCard({
@@ -62,7 +63,7 @@ function handleNewCardFormSubmit (event) {
 }
 
 cardsForm.addEventListener('submit', handleNewCardFormSubmit);
-
+*/
 /*--------------------------------------Валидация форм-------------------------------------------------*/
 
 const profileFormValidator = new FormValidator(validationConfig, profileForm);
@@ -73,9 +74,13 @@ addCardFormValidator.enableValidation();
 
 /*--------------------------------------Данные пользователя-------------------------------------------------*/
 
-const userInfo = new UserInfo({ profileName, profileOccupation });
+const userInfo = new UserInfo({ 
+    profileNameSelector: '.profile__name', 
+    profileOccupationSelector: '.profile__occupation'
+});
 
 //console.log(userInfo.setUserInfo());
+//console.log(userInfo.getUserInfo());
 
 /*--------------------------------------Открытие попапов-------------------------------------------------*/
 /*
@@ -85,7 +90,9 @@ function openPopup(element) {
 }
 */
 //Profile:
-const profileFormPopup = new Popup(profilePopup);
+
+/*
+const profileFormPopup = new Popup('.popup_profile');
 
 function editProfileForm() {
     profileFormValidator.resetForm();
@@ -109,8 +116,83 @@ function handleProfileFormSubmit (event) {
 
 profileForm.addEventListener('submit', handleProfileFormSubmit);
 
+function editProfileForm() {
+    profileFormValidator.resetForm();
+    profileFormValidator.inactiveButton();
+    nameInput.value = userInfo.getUserInfo().name;
+    occupationInput.value = userInfo.getUserInfo().occupation;
+    profileFormPopup.open();
+}
+
+editProfileButton.addEventListener('click', editProfileForm);
+*/
+
+const profileFormPopup = new PopupWithForm('.popup_profile', handleProfileFormSubmit);
+
+profileFormPopup.setEventListeners();
+
+function handleProfileFormSubmit(userData) {
+    userInfo.setUserInfo(userData);
+    profileFormPopup.close();
+}
+
+function openEditProfileForm() {
+    profileFormValidator.resetForm();
+    profileFormValidator.inactiveButton();
+    nameInput.value = userInfo.getUserInfo().name;
+    occupationInput.value = userInfo.getUserInfo().occupation;
+    profileFormPopup.open();
+}
+
+editProfileButton.addEventListener('click', openEditProfileForm);
+
 //Cards:
-const addCardFormPopup = new Popup(cardsPopup);
+
+/*
+const addCardFormPopup = new PopupWithForm('.popup_cards', handleCardFormPopup);
+
+addCardFormPopup.setEventListeners();
+
+function handleCardFormPopup(data) {
+    const newCardSection = new Section({
+        items: data,
+        renderer: () => {
+            const userCard = new Card(data, '#cards-template', handleCardClick);
+            const cardElement = userCard.generateCard();
+            newCardSection.addNewItem(cardElement);
+            }
+        }, placesContainer);
+        newCardSection.renderItems();
+        addCardFormPopup.close();
+}
+*/
+const addCardFormPopup = new PopupWithForm('.popup_cards', () => {
+
+    const newCard = {}; 
+    newCard.name = cardsFormInputName.value; 
+    newCard.link = cardsFormInputLink.value; 
+
+    const card = new Card(addCard, '#cards-template', handleCardClick);
+    const cardElement = card.generateCard();
+
+    cardsList.addNewItem(cardElement);
+
+    addCardFormPopup.close();
+});
+
+addCardFormPopup.setEventListeners();
+
+function openAddCardFormPopup() {
+    addCardFormValidator.resetForm();
+    addCardFormValidator.inactiveButton();
+    addCardFormPopup.open();
+}
+
+addCardButton.addEventListener('click', openAddCardFormPopup);
+
+/*
+//Cards:
+const addCardFormPopup = new Popup();
 
 function openAddCardPopup() {
     addCardFormValidator.resetForm();
@@ -119,14 +201,17 @@ function openAddCardPopup() {
 }
 
 addCardButton.addEventListener('click', openAddCardPopup);
-
+*/
 //Zoom:
 
-const popupWithImage = new PopupWithImage(zoomPopup);
+const popupWithImage = new PopupWithImage('.popup_zoom');
 
 function handleCardClick (name, link) {
     popupWithImage.open(name, link);
 }
+
+popupWithImage.setEventListeners();
+
 /*
 function openZoomPopup(name, link) {
     zoomImage.src = link;
