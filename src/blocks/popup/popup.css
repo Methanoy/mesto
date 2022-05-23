@@ -11,4 +11,5 @@
     left: 0;
     bottom: 0;
     right: 0;
+    transition: visibility 1s, opacity 1s;
 }
