@@ -16,7 +16,6 @@ class UserInfo {
     setUserInfo(data) {
         this._profileName.textContent = data.name;
         this._profileOccupation.textContent = data.occupation;
-        //console.log(this.setUserInfo());
     }
 }
 
