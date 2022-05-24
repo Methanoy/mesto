@@ -1,10 +1,23 @@
 .cards {
-    display: flex;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: flex-start;
     max-width: 880px;
     row-gap: 20px;
     column-gap: 17px;
     flex-wrap: wrap;
     padding: 0;
     margin: 51px 0 0 0;
+}
+
+@media screen and (max-width: 899px) and (min-width: 600px) {
+    .cards {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 599px) {
+    .cards {
+        grid-template-columns: 1fr;
+    }
 }
