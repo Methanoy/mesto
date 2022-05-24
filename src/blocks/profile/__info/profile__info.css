@@ -10,7 +10,7 @@
     max-width: 336px;
 }
 
-@media screen and (max-width: 879px) {
+@media screen and (max-width: 899px) {
     .profile__info {
         max-width: 282px;
         text-align: center;

@@ -6,7 +6,7 @@
 }
 
 /* для центрирования копирайта на сломе*/
-@media screen and (max-width: 879px) and (min-width: 321px) {
+@media screen and (max-width: 899px) and (min-width: 321px) {
     .footer {
         display: flex;
     }
