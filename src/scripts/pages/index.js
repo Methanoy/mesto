@@ -16,23 +16,29 @@ import {
     cardsForm, 
     cardsFormInputName, 
     cardsFormInputLink, 
-    cardsContainer, 
+    cardContainer, 
     editProfileButton, 
     addCardButton 
 } from '../utils/constants.js';
 
+/*--------------------------------------Создание карточки-------------------------------------------------*/
+
+const createCard = (item) => {
+    const card = new Card (item, '#cards-template', handleCardClick);
+    const cardElement = card.generateCard();
+    return cardElement;
+}
+
 /*--------------------------------------Карточки "из коробки"-------------------------------------------------*/
 
-const cardsList = new Section({
+const cardList = new Section({
     items: initialCards,
     renderer: (cardItem) => {
-        const card = new Card(cardItem, '#cards-template', handleCardClick);
-        const cardElement = card.generateCard();
-        cardsList.addItem(cardElement);
+        cardList.addItem(createCard(cardItem));
     }
-}, cardsContainer);
+}, cardContainer);
 
-cardsList.renderItems();
+cardList.renderItems();
 
 /*--------------------------------------Валидация форм-------------------------------------------------*/
 
@@ -65,8 +71,11 @@ function handleProfileFormSubmit(userData) {
 function openEditProfileForm() {
     profileFormValidator.resetForm();
     profileFormValidator.inactiveButton();
-    nameInput.value = userInfo.getUserInfo().name;
-    occupationInput.value = userInfo.getUserInfo().occupation;
+
+    const userData = userInfo.getUserInfo();
+    nameInput.value = userData.name;
+    occupationInput.value = userData.occupation;
+
     profileFormPopup.open();
 }
 
@@ -74,16 +83,9 @@ editProfileButton.addEventListener('click', openEditProfileForm);
 
 //Cards:
 
-const addCardFormPopup = new PopupWithForm('.popup_cards', () => {
+const addCardFormPopup = new PopupWithForm('.popup_cards', (inputValues) => {
 
-    const newCard = {}; 
-    newCard.name = cardsFormInputName.value; 
-    newCard.link = cardsFormInputLink.value; 
-
-    const card = new Card(newCard, '#cards-template', handleCardClick);
-    const cardElement = card.generateCard();
-
-    cardsList.addNewItem(cardElement);
+    cardList.addNewItem(createCard(inputValues));
 
     addCardFormPopup.close();
 });
