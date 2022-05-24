@@ -2,11 +2,11 @@
 
 ## Описание
 
-<h2 align="center"><img src="<%=require('./images/readme__header.jpg')%>" width="100%"></h2>
+<h2 align="center"><img src="./src/images/readme__header.jpg" width="100%"></h2>
 <p>Одностраничный сайт с редактируемыми профилем и карточками. Подготовлен в рамках курса Веб-разработчик на платформе Яндекс.Практикум.</p>
 <h2 align="center">
   <a href="https://practicum.yandex.ru/profile/web/">
-    <img src="<%=require('./images/logo_place_header.svg')%>" width="50%">
+    <img src="./src/images/logo_place_header.svg" width="50%">
   </a>
 </h2>
 
