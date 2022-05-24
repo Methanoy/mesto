@@ -16,7 +16,7 @@ import {
     cardsForm, 
     cardsFormInputName, 
     cardsFormInputLink, 
-    cardsContainer, 
+    cardContainer, 
     editProfileButton, 
     addCardButton 
 } from '../utils/constants.js';
@@ -25,7 +25,8 @@ import {
 
 const createCard = (item) => {
     const card = new Card (item, '#cards-template', handleCardClick);
-    return card;
+    const cardElement = card.generateCard();
+    return cardElement;
 }
 
 /*--------------------------------------Карточки "из коробки"-------------------------------------------------*/
@@ -33,10 +34,9 @@ const createCard = (item) => {
 const cardList = new Section({
     items: initialCards,
     renderer: (cardItem) => {
-        const cardElement = createCard(cardItem).generateCard();
-        cardList.addItem(cardElement);
+        cardList.addItem(createCard(cardItem));
     }
-}, cardsContainer);
+}, cardContainer);
 
 cardList.renderItems();
 
@@ -85,9 +85,7 @@ editProfileButton.addEventListener('click', openEditProfileForm);
 
 const addCardFormPopup = new PopupWithForm('.popup_cards', (inputValues) => {
 
-    const cardElement = createCard(inputValues).generateCard();
-
-    cardList.addNewItem(cardElement);
+    cardList.addNewItem(createCard(inputValues));
 
     addCardFormPopup.close();
 });
