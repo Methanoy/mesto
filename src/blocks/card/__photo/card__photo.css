@@ -1,5 +1,6 @@
 .card__photo {
-    width: 100%;
+    background-color: #cfcfcf;
+    width: 282px;
     height: 282px;
     margin: 0;
     padding: 0;
