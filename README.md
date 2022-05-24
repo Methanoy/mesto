@@ -2,19 +2,11 @@
 
 ## Описание
 
-<<<<<<< HEAD
-<h2 align="center"><img src="<%=require('./src/images/readme__header.jpg)%>" width="100%"></h2>
+<h2 align="center"><img src="./src/images/readme__header.jpg" width="100%"></h2>
 <p>Одностраничный сайт с редактируемыми профилем и карточками. Подготовлен в рамках курса Веб-разработчик на платформе Яндекс.Практикум.</p>
 <h2 align="center">
   <a href="https://practicum.yandex.ru/profile/web/">
-    <img src="<%=require('./src/images/logo_place_header.svg')%>" width="50%">
-=======
-<h2 align="center"><img src="<%=require('./src/images/readme__header.jpg)%>" width="100%"></h2>
-<p>Одностраничный сайт с редактируемыми профилем и карточками. Подготовлен в рамках курса Веб-разработчик на платформе Яндекс.Практикум.</p>
-<h2 align="center">
-  <a href="https://practicum.yandex.ru/profile/web/">
-    <img src="<%=require('./src/images/logo_place_header.svg')%>" width="50%">
->>>>>>> cfc91222d211d2f9a9232dcde1d1881ad16fe271
+    <img src="./src/images/logo_place_header.svg" width="50%">
   </a>
 </h2>
 
@@ -30,6 +22,7 @@
 ### Иное
 - Методология БЭМ для разметки, CSS и построения файловой структуры проекта Nested BEM.
 - Работа с макетом в Figma.
+- JS c использованием классов.
 ## Планы
 - Разработать функцию редактирования существующих карточек и добавления новых.
 ## Ссылка на GitHub Pages
