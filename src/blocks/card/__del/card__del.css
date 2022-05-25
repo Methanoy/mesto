@@ -1,5 +1,5 @@
 .card__del {
-    background: url(../../../images/card__del.svg);
+    background: url(../../../images/card__del.svg) no-repeat;
     position: absolute;
     border: none;
     width: 18px;
