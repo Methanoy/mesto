@@ -14,8 +14,6 @@ import {
     occupationInput, 
     profileForm, 
     cardsForm, 
-    cardsFormInputName, 
-    cardsFormInputLink, 
     cardContainer, 
     editProfileButton, 
     addCardButton 

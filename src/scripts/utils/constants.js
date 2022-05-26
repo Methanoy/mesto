@@ -44,8 +44,6 @@ const profileForm = document.querySelector('.popup__profile-form');
 
 //Попап карточек:
 const cardsForm = document.querySelector('.popup__cards-form');
-const cardsFormInputName = document.querySelector('.popup__input_cardname');
-const cardsFormInputLink = document.querySelector('.popup__input_link');
 
 //Темплейт:
 const cardContainer = '.cards';
@@ -61,8 +59,6 @@ export {
     occupationInput, 
     profileForm,
     cardsForm, 
-    cardsFormInputName, 
-    cardsFormInputLink,
     cardContainer,
     editProfileButton, 
     addCardButton 
