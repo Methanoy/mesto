@@ -1,5 +1,6 @@
 import '../../pages/index.css';
 
+import Api from '../components/Api';
 import Card from '../components/Card.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
@@ -8,7 +9,6 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import FormValidator from '../components/FormValidator.js';
 
 import { 
-    initialCards, 
     validationConfig,
     nameInput, 
     occupationInput, 
@@ -16,7 +16,7 @@ import {
     cardsForm, 
     cardContainer, 
     editProfileButton, 
-    addCardButton 
+    addCardButton, 
 } from '../utils/constants.js';
 
 /*--------------------------------------Создание карточки-------------------------------------------------*/
@@ -27,16 +27,42 @@ const createCard = (item) => {
     return cardElement;
 }
 
-/*--------------------------------------Карточки "из коробки"-------------------------------------------------*/
+/*--------------------------------------Данные пользователя-------------------------------------------------*/
 
-const cardList = new Section({
-    items: initialCards,
-    renderer: (cardItem) => {
-        cardList.addItem(createCard(cardItem));
+const userInfo = new UserInfo({ 
+    profileNameSelector: '.profile__name', 
+    profileOccupationSelector: '.profile__occupation',
+    profileAvatarSelector: '.profile__avatar'
+});
+
+
+/*--------------------------------------API данные "из коробки"-------------------------------------------------*/
+
+const api = new Api({
+    cardsUrl: 'https://mesto.nomoreparties.co/v1/cohort-42/cards',
+    userUrl: 'https://nomoreparties.co/v1/cohort-42/users/me',
+    headers: {
+        authorization: 'a1aad93d-4f3c-4558-841a-f9fb04c02ec2',
+        'Content-Type': 'application/json'
     }
-}, cardContainer);
+});
 
-cardList.renderItems();
+api.getAllInitialData()
+    .then(promisesArr => {
+        const [ initialCards, userData ] = promisesArr;
+        
+        const cardList = new Section({
+            items: initialCards,
+            renderer: (cardItem) => {
+                cardList.addItem(createCard(cardItem));
+            }
+        }, cardContainer);
+        
+        cardList.renderItems();
+
+        userInfo.setUserInfo(userData);
+    })
+    .catch(err => console.log(`Ошибка при получении первоначальных данных с сервера: ${err}`))
 
 /*--------------------------------------Валидация форм-------------------------------------------------*/
 
@@ -46,15 +72,8 @@ const addCardFormValidator = new FormValidator(validationConfig, cardsForm);
 profileFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 
-/*--------------------------------------Данные пользователя-------------------------------------------------*/
-
-const userInfo = new UserInfo({ 
-    profileNameSelector: '.profile__name', 
-    profileOccupationSelector: '.profile__occupation'
-});
-
 /*--------------------------------------Попапы-------------------------------------------------*/
-
+/*
 //Profile:
 
 const profileFormPopup = new PopupWithForm('.popup_profile', handleProfileFormSubmit);
@@ -97,7 +116,7 @@ function openAddCardFormPopup() {
 }
 
 addCardButton.addEventListener('click', openAddCardFormPopup);
-
+*/
 //Zoom:
 
 const popupWithImage = new PopupWithImage('.popup_zoom');
