@@ -1,6 +1,5 @@
 .card__like-zone {
     display: flex;
-    max-width: 246px;
-    padding: 25px 15px 31px 21px;
-    margin: 0;
+    flex-direction: column;
+    gap: 3px;
 }
