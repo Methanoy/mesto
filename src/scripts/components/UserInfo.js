@@ -8,7 +8,7 @@ class UserInfo {
     getUserInfo() {
         const profile = {
             name: this._profileName.textContent,
-            occupation: this._profileOccupation.textContent
+            about: this._profileOccupation.textContent
         }
 
         return profile;

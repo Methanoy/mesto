@@ -35,6 +35,14 @@ const userInfo = new UserInfo({
     profileAvatarSelector: '.profile__avatar'
 });
 
+/*--------------------------------------Пустой массив для карточек "из коробки"-------------------------------------------------*/
+
+const cardList = new Section({
+    items: '',
+    renderer: (cardItem) => {
+        cardList.addItem(createCard(cardItem));
+    }
+}, cardContainer);
 
 /*--------------------------------------API данные "из коробки"-------------------------------------------------*/
 
@@ -51,12 +59,7 @@ api.getAllInitialData()
     .then(promisesArr => {
         const [ initialCards, userData ] = promisesArr;
         
-        const cardList = new Section({
-            items: initialCards,
-            renderer: (cardItem) => {
-                cardList.addItem(createCard(cardItem));
-            }
-        }, cardContainer);
+        cardList.initialArray = initialCards;
         
         cardList.renderItems();
 
@@ -73,36 +76,41 @@ profileFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 
 /*--------------------------------------Попапы-------------------------------------------------*/
-/*
-//Profile:
 
 const profileFormPopup = new PopupWithForm('.popup_profile', handleProfileFormSubmit);
 
 profileFormPopup.setEventListeners();
 
 function handleProfileFormSubmit(userData) {
-    userInfo.setUserInfo(userData);
-    profileFormPopup.close();
+    api.editUserProfile(userData)
+        .then(res => {
+            userInfo.setUserInfo(res);
+            profileFormPopup.close();
+        })
 }
-
 function openEditProfileForm() {
     profileFormValidator.resetForm();
     profileFormValidator.inactiveButton();
-
+    
     const userData = userInfo.getUserInfo();
     nameInput.value = userData.name;
-    occupationInput.value = userData.occupation;
-
+    occupationInput.value = userData.about;
+    
     profileFormPopup.open();
 }
 
 editProfileButton.addEventListener('click', openEditProfileForm);
+//Profile:
+
 
 //Cards:
 
 const addCardFormPopup = new PopupWithForm('.popup_cards', (inputValues) => {
 
-    cardList.addNewItem(createCard(inputValues));
+    api.addNewCard(inputValues)
+        .then(res => {
+            cardList.addNewItem(createCard(res));
+        })
 
     addCardFormPopup.close();
 });
@@ -116,7 +124,7 @@ function openAddCardFormPopup() {
 }
 
 addCardButton.addEventListener('click', openAddCardFormPopup);
-*/
+
 //Zoom:
 
 const popupWithImage = new PopupWithImage('.popup_zoom');

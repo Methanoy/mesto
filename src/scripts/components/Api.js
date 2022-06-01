@@ -2,7 +2,7 @@ const handleResponse = (res) => {
     if(res.ok) {
         return res.json();
     }
-    return Promise.reject('Okay, Houston, we\'ve had a problem here');
+    return Promise.reject(`Okay, Houston, we\'ve had a problem here: ${res.status}`);
 }
 
 class Api {
@@ -31,25 +31,31 @@ class Api {
     }
 
     editUserProfile(data) {
-        return fetch(this.url, {
+        return fetch(this.userUrl, {
             method: 'PATCH',
             headers: this.headers,
-            body: JSON.stringify(data)
+            body: JSON.stringify({
+                name: data.name,
+                about: data.about,
+            })
         })
         .then(handleResponse);
     }
 
-    createNewCard(data) {
-        return fetch(this.url, {
+    addNewCard(data) {
+        return fetch(this.cardsUrl, {
             method: 'POST',
             headers: this.headers,
-            body: JSON.stringify(data)
+            body: JSON.stringify({
+                name: data.name,
+                link: data.link,
+            })
         })
         .then(handleResponse);
     }
 
     deleteCard(data) {
-        return fetch(this.url, {
+        return fetch(this.cardsUrl, {
             method: 'DELETE',
             headers: this.headers,
             body: JSON.stringify(data)
