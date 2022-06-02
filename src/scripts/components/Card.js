@@ -44,6 +44,10 @@ class Card {
         this._element.querySelector('.card__like').classList.toggle('card__like_active');
     }
 
+    _isConfirmed() {
+
+    }
+
     _handleDeleteCard() {
         this._element.remove();
         this._element = null;

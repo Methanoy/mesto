@@ -30,13 +30,24 @@ class Api {
         return Promise.all([ this._getInitialCardsData(), this._getInitialUserData() ])
     }
 
-    editUserProfile(data) {
+    editUserInfo(data) {
         return fetch(this.userUrl, {
             method: 'PATCH',
             headers: this.headers,
             body: JSON.stringify({
                 name: data.name,
                 about: data.about,
+            })
+        })
+        .then(handleResponse);
+    }
+
+    editUserAvatar(data) {
+        return fetch(this.userUrl, {
+            method: 'PATCH',
+            headers: this.headers,
+            body: JSON.stringify({
+                avatar: data.avatar,
             })
         })
         .then(handleResponse);

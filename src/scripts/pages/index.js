@@ -77,31 +77,32 @@ addCardFormValidator.enableValidation();
 
 /*--------------------------------------Попапы-------------------------------------------------*/
 
+//Profile:
+
 const profileFormPopup = new PopupWithForm('.popup_profile', handleProfileFormSubmit);
 
 profileFormPopup.setEventListeners();
 
 function handleProfileFormSubmit(userData) {
-    api.editUserProfile(userData)
+    api.editUserInfo(userData)
         .then(res => {
             userInfo.setUserInfo(res);
             profileFormPopup.close();
         })
 }
+
 function openEditProfileForm() {
     profileFormValidator.resetForm();
     profileFormValidator.inactiveButton();
-    
+
     const userData = userInfo.getUserInfo();
     nameInput.value = userData.name;
     occupationInput.value = userData.about;
-    
+
     profileFormPopup.open();
 }
 
 editProfileButton.addEventListener('click', openEditProfileForm);
-//Profile:
-
 
 //Cards:
 
