@@ -9,16 +9,17 @@
 </head>
 
 <body class="page">
-    <header class="header">
+    <header class="header" aria-label="Изменить аватар" type="button">
         <img class="header__logo" src="<%=require('./images/header_logo.svg')%>" alt="Логотип проекта 'Место', написанный латинскими буквами.">
     </header>
 
     <main class="content">
 
         <section class="profile">
-            <img class="profile__avatar" src="<%=require('./images/profile_avatar.jpg')%>" alt="Улыбающийся Жак-Ив Кусто на фоне голубого океана.">
-            <div class="pr
-        ofile__info">
+            <button class="profile__avatar-button">
+                <img class="profile__avatar" src="<%=require('./images/profile_avatar.jpg')%>" alt="Улыбающийся Жак-Ив Кусто на фоне голубого океана.">
+            </button>
+            <div class="profile__info">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
                 <p class="profile__occupation">Исследователь океана</p>
                 <button class="profile__edit-button" aria-label="Редактировать профиль" type="button"></button>

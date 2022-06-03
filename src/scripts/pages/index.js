@@ -44,7 +44,7 @@ const cardList = new Section({
     }
 }, cardContainer);
 
-/*--------------------------------------API данные "из коробки"-------------------------------------------------*/
+/*--------------------------------------API данные "из коробки"------------------------------------------------*/
 
 const api = new Api({
     cardsUrl: 'https://mesto.nomoreparties.co/v1/cohort-42/cards',
@@ -83,8 +83,8 @@ const profileFormPopup = new PopupWithForm('.popup_profile', handleProfileFormSu
 
 profileFormPopup.setEventListeners();
 
-function handleProfileFormSubmit(userData) {
-    api.editUserInfo(userData)
+function handleProfileFormSubmit(data) {
+    api.editUserInfo(data)
         .then(res => {
             userInfo.setUserInfo(res);
             profileFormPopup.close();
