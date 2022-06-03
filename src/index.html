@@ -149,5 +149,29 @@
         </div>
     </div>
 
+    <div class="popup popup_avatar">
+        <div class="popup__container">
+            <button class="popup__close-button" aria-label="Закрыть" type="button"></button>
+            <h3 class="popup__title popup__title_avatar">Обновить аватар</h3>
+            <div class="popup__content">
+                <form class="popup__form popup__avatar-form" name="avatar" novalidate>
+
+                    <input 
+                    id="link-input"
+                    class="popup__input popup__input_link" 
+                    type="url" 
+                    name="link" 
+                    value="" 
+                    placeholder="Ссылка на картинку" 
+                    autocomplete="off"
+                    required>
+                    <span class="link-input-error popup__input-error"></span>
+
+                    <button class="popup__save-button" type="submit" aria-label="Да">Сохранить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
