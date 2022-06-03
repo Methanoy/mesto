@@ -8,7 +8,7 @@ class UserInfo {
     getUserInfo() {
         const profile = {
             name: this._profileName.textContent,
-            about: this._profileOccupation.textContent
+            about: this._profileOccupation.textContent,
         }
 
         return profile;
@@ -17,6 +17,9 @@ class UserInfo {
     setUserInfo(data) {
         this._profileName.textContent = data.name;
         this._profileOccupation.textContent = data.about;
+    }
+
+    setUserAvatar(data) {
         this._profileAvatar.src = data.avatar;
     }
 }

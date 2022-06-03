@@ -7,7 +7,7 @@
     border: none;
     overflow: hidden;
     cursor: pointer;
-    transition: opacity 1s ease 0s;
+    transition: background-color 1s ease 0s;
     background: transparent;
 }
 

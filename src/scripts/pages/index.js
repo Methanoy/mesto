@@ -13,10 +13,12 @@ import {
     nameInput, 
     occupationInput, 
     profileForm, 
+    avatarForm,
     cardsForm, 
     cardContainer, 
     editProfileButton, 
-    addCardButton, 
+    addCardButton,
+    editAvatarButton
 } from '../utils/constants.js';
 
 /*--------------------------------------Создание карточки-------------------------------------------------*/
@@ -49,6 +51,7 @@ const cardList = new Section({
 const api = new Api({
     cardsUrl: 'https://mesto.nomoreparties.co/v1/cohort-42/cards',
     userUrl: 'https://nomoreparties.co/v1/cohort-42/users/me',
+    avatarUrl: 'https://mesto.nomoreparties.co/v1/cohort-42/users/me/avatar',
     headers: {
         authorization: 'a1aad93d-4f3c-4558-841a-f9fb04c02ec2',
         'Content-Type': 'application/json'
@@ -57,13 +60,13 @@ const api = new Api({
 
 api.getAllInitialData()
     .then(promisesArr => {
-        const [ initialCards, userData ] = promisesArr;
+        const [ initialCards, userData, userAvatar ] = promisesArr;
         
         cardList.initialArray = initialCards;
         
         cardList.renderItems();
-
         userInfo.setUserInfo(userData);
+        userInfo.setUserAvatar(userAvatar);
     })
     .catch(err => console.log(`Ошибка при получении первоначальных данных с сервера: ${err}`))
 
@@ -71,9 +74,11 @@ api.getAllInitialData()
 
 const profileFormValidator = new FormValidator(validationConfig, profileForm);
 const addCardFormValidator = new FormValidator(validationConfig, cardsForm);
+const editAvatarFormValidator = new FormValidator(validationConfig, avatarForm);
 
 profileFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
+editAvatarFormValidator.enableValidation();
 
 /*--------------------------------------Попапы-------------------------------------------------*/
 
@@ -104,6 +109,27 @@ function openEditProfileForm() {
 
 editProfileButton.addEventListener('click', openEditProfileForm);
 
+//Avatar:
+
+const avatarFormPopup = new PopupWithForm('.popup_avatar', (data) => {
+
+    api.editUserAvatar(data)
+        .then(res => {
+            userInfo.setUserAvatar(res);
+        })
+    avatarFormPopup.close();
+});
+
+avatarFormPopup.setEventListeners();
+
+function openEditAvatarForm() {
+    editAvatarFormValidator.resetForm();
+    editAvatarFormValidator.inactiveButton();
+    avatarFormPopup.open();
+}
+
+editAvatarButton.addEventListener('click', openEditAvatarForm);
+
 //Cards:
 
 const addCardFormPopup = new PopupWithForm('.popup_cards', (inputValues) => {
@@ -112,7 +138,6 @@ const addCardFormPopup = new PopupWithForm('.popup_cards', (inputValues) => {
         .then(res => {
             cardList.addNewItem(createCard(res));
         })
-
     addCardFormPopup.close();
 });
 

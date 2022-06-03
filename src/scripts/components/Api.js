@@ -10,6 +10,7 @@ class Api {
         this.cardsUrl = options.cardsUrl;
         this.userUrl = options.userUrl;
         this.headers = options.headers;
+        this.avatarUrl = options.avatarUrl;
     }
 
     _getInitialCardsData() {
@@ -26,8 +27,15 @@ class Api {
         .then(handleResponse);
     }
 
+    _getInitialUserAvatar() {
+        return fetch(this.userUrl, {
+            headers: this.headers
+        })
+        .then(handleResponse);
+    }
+
     getAllInitialData() {
-        return Promise.all([ this._getInitialCardsData(), this._getInitialUserData() ])
+        return Promise.all([ this._getInitialCardsData(), this._getInitialUserData(), this._getInitialUserAvatar() ])
     }
 
     editUserInfo(data) {
@@ -43,7 +51,7 @@ class Api {
     }
 
     editUserAvatar(data) {
-        return fetch(this.userUrl, {
+        return fetch(this.avatarUrl, {
             method: 'PATCH',
             headers: this.headers,
             body: JSON.stringify({
