@@ -162,6 +162,7 @@ const avatarFormPopup = new PopupWithForm('.popup_avatar', (data) => {
     api.editUserAvatar(data)
         .then(res => {
             userInfo.setUserAvatar(res);
+            avatarFormPopup.close();
         })
         .catch(err => {
             console.log(`Ошибка при изменении аватара: ${err}`);
@@ -169,8 +170,6 @@ const avatarFormPopup = new PopupWithForm('.popup_avatar', (data) => {
         .finally(() => {
             avatarFormPopup.loading(false);
         })
-
-    avatarFormPopup.close();
 });
 
 avatarFormPopup.setEventListeners();
@@ -191,6 +190,7 @@ const addCardFormPopup = new PopupWithForm('.popup_cards', (inputValues) => {
     api.addNewCard(inputValues)
         .then(res => {
             cardList.addNewItem(createCard(res));
+            addCardFormPopup.close();
         })
         .catch(err => {
             console.log(`Ошибка при добавлении новой карточки: ${err}`);
@@ -198,8 +198,6 @@ const addCardFormPopup = new PopupWithForm('.popup_cards', (inputValues) => {
         .finally(() => {
             addCardFormPopup.loading(false);
         })
-
-    addCardFormPopup.close();
 });
 
 addCardFormPopup.setEventListeners();
