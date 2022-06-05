@@ -6,7 +6,7 @@
     border: none;
     margin: 0;
     margin-left: auto;
-    align-self: center;
+    background-position: center;
     transition: opacity 1s ease 0s;
     cursor: pointer;
 }
