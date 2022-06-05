@@ -73,15 +73,37 @@ class Api {
         .then(handleResponse);
     }
 
-    deleteCard(data) {
-        return fetch(this.cardsUrl, {
+    deleteCard(id) {
+        return fetch(`${this.cardsUrl}/${id}`, {
             method: 'DELETE',
             headers: this.headers,
-            body: JSON.stringify(data)
         })
         .then(handleResponse);
     }
 
+    changeCardLikeStatus(id, flag) {
+        if(flag) {
+            return this._likeCard(id);
+        } else {
+            return this._unLikeCard(id);
+        }
+    }
+
+    _likeCard(id) {
+        return fetch(`${this.cardsUrl}/${id}/likes`, {
+            method: 'PUT',
+            headers: this.headers,
+        })
+        .then(handleResponse);
+    }
+
+    _unLikeCard(id) {
+        return fetch(`${this.cardsUrl}/${id}/likes`, {
+            method: 'DELETE',
+            headers: this.headers,
+        })
+        .then(handleResponse);
+    }
 }
 
 export default Api;

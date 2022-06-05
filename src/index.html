@@ -17,7 +17,7 @@
 
         <section class="profile">
             <button class="profile__avatar-button">
-                <img class="profile__avatar" src="<%=require('./images/profile_avatar.jpg')%>" alt="Улыбающийся Жак-Ив Кусто на фоне голубого океана.">
+                <img class="profile__avatar" src="<%=require('./images/profile_avatar.jpg')%>" alt="Улыбающийся Жак-Ив Кусто на фоне океана.">
             </button>
             <div class="profile__info">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -144,7 +144,9 @@
             <button class="popup__close-button" aria-label="Закрыть" type="button"></button>
             <div class="popup__content">
                 <h3 class="popup__title popup__title_confirmation">Вы уверены?</h3>
-                <button class="popup__save-button" type="submit" aria-label="Да">Да</button>
+                <form class="popup__form" name="confirmation" novalidate>
+                    <button class="popup__save-button" type="submit" aria-label="Да">Да</button>
+                </form>
             </div>
         </div>
     </div>

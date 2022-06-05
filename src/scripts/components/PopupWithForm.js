@@ -6,6 +6,7 @@ class PopupWithForm extends Popup {
         this._handleFormSubmit = handleProfileFormSubmit;
         this._form = this._popupSelector.querySelector('.popup__form');
         this._inputList = this._form.querySelectorAll('.popup__input');
+        this._submitBtn = this._form.querySelector('.popup__save-button');
     }
 
     _getInputValues() {
@@ -30,6 +31,14 @@ class PopupWithForm extends Popup {
     close() {
         super.close();
         this._form.reset();
+    }
+
+    loading(flag) {
+        if(flag) {
+            this._submitBtn.textContent = 'Сохранение...';
+        } else {
+            this._submitBtn.textContent = 'Сохранить';
+        }
     }
 }
 
