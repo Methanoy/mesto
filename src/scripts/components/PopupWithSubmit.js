@@ -23,7 +23,7 @@ class PopupWithSubmit extends Popup {
         if(flag) {
             this._submitBtn.textContent = 'Сохранение...';
         } else {
-            this._submitBtn.textContent = 'Удалено';
+            this._submitBtn.textContent = 'Да';
         }
     }
 }
