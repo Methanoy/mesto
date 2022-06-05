@@ -27,15 +27,8 @@ class Api {
         .then(handleResponse);
     }
 
-    _getInitialUserAvatar() {
-        return fetch(this.userUrl, {
-            headers: this.headers
-        })
-        .then(handleResponse);
-    }
-
     getAllInitialData() {
-        return Promise.all([ this._getInitialCardsData(), this._getInitialUserData(), this._getInitialUserAvatar() ])
+        return Promise.all([ this._getInitialCardsData(), this._getInitialUserData() ])
     }
 
     editUserInfo(data) {

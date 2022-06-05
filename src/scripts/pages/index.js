@@ -53,14 +53,14 @@ const api = new Api({
 
 api.getAllInitialData()
     .then(promisesArr => {
-        const [ initialCards, userData, userAvatar ] = promisesArr;
+        const [ initialCards, userData ] = promisesArr;
         
         cardList.initialArray = initialCards;
         userId = userData._id;
 
         cardList.renderItems();
         userInfo.setUserInfo(userData);
-        userInfo.setUserAvatar(userAvatar);
+        userInfo.setUserAvatar(userData);
     })
     .catch(err => console.log(`Ошибка при получении первоначальных данных с сервера: ${err}`))
 
