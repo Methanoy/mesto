@@ -26,7 +26,7 @@ class Popup {
     }
 
     _handleEscClose(evt) {
-        if(evt.code === 'Escape') {
+        if(evt.key === 'Escape') {
             this.close();
         }
     }

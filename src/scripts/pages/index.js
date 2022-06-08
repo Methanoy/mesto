@@ -87,11 +87,11 @@ const createCard = (item) => {
                 confirmationPopup.loading(true);
                 api.deleteCard(id)
                     .then(() => {
-                        confirmationPopup.close();
                         card.handleDeleteCard();
+                        confirmationPopup.close();
                     })
                     .catch(err => {
-                        console.log(`Ошибка при удалении карточки:  ${err}`);
+                        console.log(`Ошибка при удалении карточки: ${err}`);
                     })
                     .finally(() => {
                         confirmationPopup.loading(false);

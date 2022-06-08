@@ -3,6 +3,7 @@
     margin: 0 auto;
     padding: 45px 0 0;
     border-bottom: 1px solid rgba(84, 84, 84, .7);
+    background-color: black;
 }
 
 @media screen and (max-width: 879px) and (min-width: 321px) {

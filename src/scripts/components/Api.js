@@ -9,8 +9,8 @@ class Api {
     constructor(options) {
         this.cardsUrl = options.cardsUrl;
         this.userUrl = options.userUrl;
-        this.headers = options.headers;
         this.avatarUrl = options.avatarUrl;
+        this.headers = options.headers;
     }
 
     _getInitialCardsData() {
