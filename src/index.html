@@ -9,20 +9,20 @@
 </head>
 
 <body class="page">
-    <header class="header" aria-label="Изменить аватар" type="button">
+    <header class="header">
         <img class="header__logo" src="<%=require('./images/header_logo.svg')%>" alt="Логотип проекта 'Место', написанный латинскими буквами.">
     </header>
 
     <main class="content">
 
         <section class="profile">
-            <button class="profile__avatar-button">
-                <img class="profile__avatar" src="<%=require('./images/profile_avatar.jpg')%>" alt="Улыбающийся Жак-Ив Кусто на фоне океана.">
+            <button class="profile__avatar-button" aria-label="Редактировать аватар" type="button">
+                <img class="profile__avatar" src="<%=require('./images/profile_avatar.jpg')%>" alt="Ваш аватар.">
             </button>
             <div class="profile__info">
-                <h1 class="profile__name">Жак-Ив Кусто</h1>
-                <p class="profile__occupation">Исследователь океана</p>
-                <button class="profile__edit-button" aria-label="Редактировать профиль" type="button"></button>
+                <h1 class="profile__name">Загрузка...</h1>
+                <p class="profile__occupation"></p>
+                <button class="profile__edit-button" aria-label="Редактировать данные профиля" type="button"></button>
             </div>
             <button class="profile__add-button" aria-label="Добавить картинку" type="button"></button>
         </section>
