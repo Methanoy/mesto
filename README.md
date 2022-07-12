@@ -1,5 +1,7 @@
 <h1 align="center">Добро пожаловать на страницу проекта Mesto</h1>
 
+## Ссылка на GitHub Pages
+[Проект на GitHub Pages](https://methanoy.github.io/mesto/)
 ## Описание
 
 <h2 align="center"><img src="./src/images/readme__header.jpg" width="100%"></h2>
@@ -25,5 +27,3 @@
 - JS c использованием классов.
 ## Планы
 - Разработать функцию редактирования существующих карточек и добавления новых.
-## Ссылка на GitHub Pages
-[Проект на GitHub Pages](https://methanoy.github.io/mesto/)
