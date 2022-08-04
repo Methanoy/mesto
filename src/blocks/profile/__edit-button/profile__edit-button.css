@@ -9,7 +9,7 @@
     width: 24px;
     height: 24px;
     grid-area: edit-button;
-    transition: opacity 1s ease 0s;
+    transition: opacity .3s ease 0s;
     cursor: pointer;
 }
 
