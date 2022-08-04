@@ -4,7 +4,7 @@
     border-radius: 50%;
     margin-right: 30px;
     object-fit: cover;
-    transition: opacity 1s ease 0s;
+    transition: opacity .3s ease 0s;
     position: relative;
     z-index: -1;
 }

@@ -8,7 +8,7 @@
     height: 19px;
     top: 18px;
     right: 18px;
-    transition: opacity 1s ease 0s;
+    transition: opacity .3s ease 0s;
     cursor: pointer;
 }
 
